@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,8 @@ import com.example.demo.service.LicenseService;
 public class LicenseController {
 	@Autowired
 	private LicenseService licenseService;
+	@Autowired
+	MessageSource messages;
 
 	@RequestMapping(value = "/{licenseId}", method = RequestMethod.GET)
 	public ResponseEntity<License> getLicense(@PathVariable("organizationId") String organizationId,
@@ -31,20 +34,25 @@ public class LicenseController {
 	}
 
 	@PutMapping
-	public ResponseEntity<String> updateLicense(@PathVariable("organizationId") String organizationId,
+	public ResponseEntity<License> updateLicense(@PathVariable("organizationId") String organizationId,
 			@RequestBody License request) {
-		return ResponseEntity.ok(licenseService.updateLicense(request, organizationId));
+		return ResponseEntity.ok(licenseService.updateLicense(request));
 	}
 
 	@PostMapping
-	public ResponseEntity<String> createLicense(@PathVariable("organizationId") String organizationId,
+	public ResponseEntity<License> createLicense(@PathVariable("organizationId") String organizationId,
 			@RequestBody License request,@RequestHeader(value = "Accept-Language",required = false) Locale locale) {
-		return ResponseEntity.ok(licenseService.createLicense(request, organizationId,locale));
+		return ResponseEntity.ok(licenseService.createLicense(request));
 	}
 
 	@DeleteMapping(value = "/{licenseId}")
 	public ResponseEntity<String> deleteLicense(@PathVariable("organizationId") String organizationId,
 			@PathVariable("licenseId") String licenseId) {
-		return ResponseEntity.ok(licenseService.deleteLicense(licenseId, organizationId));
+		return ResponseEntity.ok(licenseService.deleteLicense(licenseId));
+	}
+	
+	@PostMapping
+	public ResponseEntity<String> createLicense(@RequestHeader(value = "Accept-Language",required = false) Locale locale) {
+		return ResponseEntity.ok(String.format(messages.getMessage("license.delete.message", null, locale)));
 	}
 }
