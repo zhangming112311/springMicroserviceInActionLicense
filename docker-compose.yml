@@ -1,11 +1,13 @@
 version: '3.7'
 services:
   licensingservice:
-    image: ostock/licensing-service:0.0.1-SNAPSHOT
+    image: licensing:latest
     ports:
       - "8080:8080"
     environment:
-      - "SPRING_PROFILES_ACTIVE=dev"
+      SPRING_PROFILES_ACTIVE: "dev"
+      SPRING_CLOUD_CONFIG_URI:
+        http://configserver:8071
     networks:
       backend:
         aliases:
@@ -13,3 +15,4 @@ services:
 networks:
   backend:
     driver: bridge
+#docker-compose up

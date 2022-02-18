@@ -11,3 +11,5 @@ COPY --from=build application/spring-boot-loader/ ./
 COPY --from=build application/snapshot-dependencies/ ./
 COPY --from=build application/application/ ./
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+#docker build . --tag licensing-service
+#docker run -it -p8080:8080 licensing-service:latest
