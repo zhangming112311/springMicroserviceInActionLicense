@@ -51,7 +51,7 @@ public class LicenseController {
 		return ResponseEntity.ok(licenseService.deleteLicense(licenseId));
 	}
 	
-	@PostMapping
+	@PostMapping(value = "test")
 	public ResponseEntity<String> createLicense(@RequestHeader(value = "Accept-Language",required = false) Locale locale) {
 		return ResponseEntity.ok(String.format(messages.getMessage("license.delete.message", null, locale)));
 	}

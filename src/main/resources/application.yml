@@ -1,1 +1,1 @@
-example:  property: I AM THE DEFAULTalipay:  key: licensing
+spring:    application:     name: licensing-service     profiles:      active: dev#    cloud:#        config: #          uri: http://configserver:8071    config:      import: optional:configserver:http://127.0.0.1:8071
