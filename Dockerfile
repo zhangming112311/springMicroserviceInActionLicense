@@ -11,5 +11,7 @@ COPY --from=build application/spring-boot-loader/ ./
 COPY --from=build application/snapshot-dependencies/ ./
 COPY --from=build application/application/ ./
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+##mvn clean package 
 #docker build . --tag licensing-service
 #docker run -it -p8080:8080 licensing-service:latest
+#docker run -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -it -p8080:8080 jboss/keycloak
