@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import java.util.Locale;
 
+import javax.annotation.security.RolesAllowed;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +53,7 @@ public class LicenseController {
 			@RequestBody License request,@RequestHeader(value = "Accept-Language",required = false) Locale locale) {
 		return ResponseEntity.ok(licenseService.createLicense(request));
 	}
-
+	@RolesAllowed({ "ADMIN", "USER" })
 	@DeleteMapping(value = "/{licenseId}")
 	public ResponseEntity<String> deleteLicense(@PathVariable("organizationId") String organizationId,
 			@PathVariable("licenseId") String licenseId) {

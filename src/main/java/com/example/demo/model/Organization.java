@@ -1,20 +1,20 @@
 package com.example.demo.model;
 
-
-
-
-import lombok.Data;
+import org.springframework.data.redis.core.RedisHash;
+import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString
+@RedisHash("organization")
 public class Organization {
-
+	@Id
 	String id;
-    String name;
-    String contactName;
-    String contactEmail;
-    String contactPhone;
-    
+	String name;
+	String contactName;
+	String contactEmail;
+	String contactPhone;
 }
